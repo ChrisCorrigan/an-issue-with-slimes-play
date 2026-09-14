@@ -108,6 +108,9 @@ SlimesGame.Level1.prototype = {
         this.slimes = this.add.group();
         this.slimes.enableBody = true;
         this.slimes.physicsBodyType = Phaser.Physics.ARCADE;
+        this.MAX_LIVING_SLIMES = 20;
+        this.RESPAWN_THRESHOLD = Math.floor(this.MAX_LIVING_SLIMES / 2);
+        this.replenishingSlimes = true;
         // create a timer event to auto spawn slimes
         this.spawnEnemyTimer = this.game.time.create(false);
         this.spawnEnemyTimer.loop(3000, this.spawnEnemy, this);
@@ -580,6 +583,9 @@ SlimesGame.Level1.prototype = {
 
         // slime actions
         this.slimes.forEach(function (thisSlime) {
+            if (thisSlime.dyingInLava) {
+                return;
+            }
 //            console.log('Slime #'+thisSlime.slimeID+' nextAction: '+thisSlime.nextAction+', nextActionCue: '+thisSlime.nextActionCue);
             // run collisions on each slime
             if (thisSlime.health <= 0) {
@@ -1045,7 +1051,21 @@ SlimesGame.Level1.prototype = {
         }
     },
 
+    shouldSpawnEnemy: function(livingCount) {
+        if (this.replenishingSlimes && livingCount >= this.MAX_LIVING_SLIMES) {
+            this.replenishingSlimes = false;
+        } else if (!this.replenishingSlimes && livingCount <= this.RESPAWN_THRESHOLD) {
+            this.replenishingSlimes = true;
+        }
+
+        return this.replenishingSlimes && livingCount < this.MAX_LIVING_SLIMES;
+    },
+
     spawnEnemy: function() {
+        if (!this.shouldSpawnEnemy(this.slimes.countLiving())) {
+            return;
+        }
+
         if (!this.spawnOne){
             // create a new enemy
             var enemy;
@@ -1098,6 +1118,7 @@ SlimesGame.Level1.prototype = {
             enemy.actionTimestamp = 0;
             // timestamp provides slight delay between attacks
             enemy.attackTimestamp = 0;
+            enemy.dyingInLava = false;
             enemy.body.velocity.x = enemy.speed;
             // create a jump timer object for a short burst of x velocity (to add to the y)
             enemy.jumpXTimer = this.game.time.create(false);
@@ -1231,15 +1252,30 @@ SlimesGame.Level1.prototype = {
             SlimesGame.Player.hp = 0;
             return;
         }
+        if (victim.dyingInLava) {
+            return;
+        }
+        victim.dyingInLava = true;
+        victim.alive = false;
 //        var gray = this.game.add.filter('Gray');
 //        victim.filters = [gray];
         victim.body.velocity.x = 0;
         victim.body.velocity.y = 15;
+        victim.body.enable = false;
         victim.animations.stop();
+        if (victim.stateChangeTimer && victim.stateChangeTimer.running) {
+            victim.stateChangeTimer.stop();
+        }
+        if (victim.deathTimer && victim.deathTimer.running) {
+            victim.deathTimer.stop();
+        }
+        if (victim.jumpXTimer && victim.jumpXTimer.running) {
+            victim.jumpXTimer.stop();
+        }
         var fade = this.game.add.tween(victim);
-        fade.to( { alpha: 0 }, 250, Phaser.Easing.Linear.None, true, 0, 250, true);
+        fade.to( { alpha: 0 }, 250, Phaser.Easing.Linear.None, true);
 //        console.log('slime ID: '+victim.slimeID+' killed by lava');
-        fade.onComplete.add(function(){victim.destroy();});
+        fade.onComplete.addOnce(function(){victim.destroy();});
 
     },
 
