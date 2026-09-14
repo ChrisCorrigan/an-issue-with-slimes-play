@@ -26,7 +26,7 @@ SlimesGame.Preloader.prototype = {
         this.load.tilemap('map', 'levels/dungeon.json', null, Phaser.Tilemap.TILED_JSON);
 
         // images
-        this.load.image('title', 'assets/images/title.png');
+        this.load.image('title', 'assets/images/title.png?v=0.2.1');
         this.load.image('tiles-bg', 'assets/images/backgrounds60x60.png');
         this.load.image('tiles-world', 'assets/images/world30x30.png');
 
