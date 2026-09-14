@@ -4,17 +4,17 @@
 	<meta charset="UTF-8" />
 	<title>Original prototype · An Issue With Slimes</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="css/stylesheet.css" rel="stylesheet" type="text/css">
-	<script src="phaser.js"></script>
-	<script src="Boot.js"></script>
-	<script src="Preloader.js"></script>
-    <script src="Player.js"></script>
-	<script src="MainMenu.js"></script>
-    <script src="Level1.js"></script>
+    <link href="css/stylesheet.css?v=0.2.0" rel="stylesheet" type="text/css">
+	<script src="phaser.js?v=0.2.0"></script>
+	<script src="Boot.js?v=0.2.0"></script>
+	<script src="Preloader.js?v=0.2.0"></script>
+    <script src="Player.js?v=0.2.0"></script>
+	<script src="MainMenu.js?v=0.2.0"></script>
+    <script src="Level1.js?v=0.2.0"></script>
 </head>
 <body>
 
-<nav class="prototype-nav"><a href="index.html">← Main menu</a><span>Original prototype · 2014</span><button id="startGame" type="button" disabled>Loading…</button></nav>
+<nav class="prototype-nav"><a href="index.html">← Main menu</a><span>Original prototype · 2014</span><span id="menuStatus" aria-live="polite">Loading…</span></nav>
 <div class="gameWrap">
     <div id="gameContainer"></div>
 </div>
@@ -35,10 +35,6 @@ window.onload = function() {
 //    game.state.add('Player', SlimesGame.Player);
 //	game.state.add('Game', SlimesGame.Game);
     game.state.add('Level1', SlimesGame.Level1);
-
-	document.getElementById('startGame').onclick = function () {
-        game.state.getCurrentState().startGame();
-    };
 
     // Now start the Boot state.
 	game.state.start('Boot');

@@ -10,6 +10,7 @@ SlimesGame.Level1.prototype = {
 
         SlimesGame.Player.hp = 100;
         this.exiting = false;
+        document.getElementById('menuStatus').textContent = 'Explore the dungeon';
 
         // level constants
 //        thisLevel = this; // to use for this level context when it is hard to access
@@ -119,8 +120,8 @@ SlimesGame.Level1.prototype = {
 //        this.players= this.add.group();
 
         // player animations
-//          this.player = this.add.sprite(78, 498, 'dwarf');
-        this.player = this.add.sprite(670, 50, 'dwarf');
+        this.player = this.add.sprite(78, 498, 'dwarf');
+//        this.player = this.add.sprite(670, 50, 'dwarf');
 //        this.player = this.add.sprite(260, 534, 'dwarf');
 //        this.players.add(this.player);
         this.player.anchor.setTo(0.5, 0.5);
