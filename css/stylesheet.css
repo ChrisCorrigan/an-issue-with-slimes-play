@@ -1,0 +1,25 @@
+body {
+    margin: 0px 0px 1px 0px; /* the extra 1px allows the iOS inner/outer check to work */
+    background: #000 url('../assets/images/lava-cave3.jpg') no-repeat 0 0;
+    background-size: 100%;
+}
+
+.gameWrap {
+    border: 1px solid #47190a;
+    box-shadow: 0 0 20px 6px #47190a;
+    width: 1030px;
+    height: 610px;
+    margin: 3% auto;
+    vertical-align: middle;
+}
+#gameContainer {
+    width: 1020px;
+    height: 600px;
+    cursor: pointer;
+    border: 5px solid #170b08;
+    margin: auto;
+}
+.prototype-nav { display:flex; align-items:center; gap:24px; padding:14px 20px; color:#eee; background:#170f0c; font:14px system-ui,sans-serif; position:sticky; left:0; top:0; z-index:2; }
+.prototype-nav a { color:#cff2ab; font-weight:700; }
+.prototype-nav button { cursor:pointer; padding:8px 18px; background:#c3e89d; color:#17210f; border:0; border-radius:5px; font-weight:700; }
+.prototype-nav button:disabled { opacity:.6; }

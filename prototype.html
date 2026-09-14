@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Original prototype · An Issue With Slimes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/stylesheet.css" rel="stylesheet" type="text/css">
+	<script src="phaser.js"></script>
+	<script src="Boot.js"></script>
+	<script src="Preloader.js"></script>
+    <script src="Player.js"></script>
+	<script src="MainMenu.js"></script>
+    <script src="Level1.js"></script>
+</head>
+<body>
+
+<nav class="prototype-nav"><a href="index.html">← Main menu</a><span>Original prototype · 2014</span><button id="startGame" type="button" disabled>Loading…</button></nav>
+<div class="gameWrap">
+    <div id="gameContainer"></div>
+</div>
+
+<script type="text/javascript">
+
+window.onload = function() {
+
+	//	Create your Phaser game and inject it into the gameContainer div.
+	//	We did it in a window.onload event, but you can do it anywhere (requireJS load, anonymous function, jQuery dom ready, - whatever floats your boat)
+    var game = new Phaser.Game(1020, 600, Phaser.CANVAS, 'gameContainer');
+
+	//	Add the States your game has.
+	//	You don't have to do this in the html, it could be done in your Boot state too, but for simplicity I'll keep it here.
+	game.state.add('Boot', SlimesGame.Boot);
+	game.state.add('Preloader', SlimesGame.Preloader);
+	game.state.add('MainMenu', SlimesGame.MainMenu);
+//    game.state.add('Player', SlimesGame.Player);
+//	game.state.add('Game', SlimesGame.Game);
+    game.state.add('Level1', SlimesGame.Level1);
+
+	document.getElementById('startGame').onclick = function () {
+        game.state.getCurrentState().startGame();
+    };
+
+    // Now start the Boot state.
+	game.state.start('Boot');
+
+};
+
+</script>
+
+</body>
+</html>
