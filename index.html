@@ -4,19 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>An Issue With Slimes</title>
-<link rel="stylesheet" href="css/launcher.css?v=0.2.3">
+<link rel="stylesheet" href="css/launcher.css?v=0.3.0">
 </head>
 <body>
 <main>
-<img class="title" src="assets/images/title.png?v=0.2.3" alt="An Issue With Slimes">
+<img class="title" src="assets/images/title.png?v=0.3.0" alt="An Issue With Slimes">
 <p class="intro">A dwarf. A dungeon. An unreasonable number of slimes.</p>
 <p id="returnMessage" role="status"></p>
 <div class="choices">
 <a class="choice playable" href="prototype.html"><span class="eyebrow">THE 2014 GAME</span><h1>Original prototype</h1><p>Explore the dungeon, grab an axe, and see how long you last.</p><span class="action">Play prototype <span aria-hidden="true">→</span></span></a>
-<section class="choice upcoming" aria-labelledby="new-title"><span class="eyebrow">THE NEXT CHAPTER</span><h2 id="new-title">New game</h2><p>A new adventure is on the way. The slimes are making preparations.</p><span class="badge">Coming soon</span></section>
+<a class="choice playable" href="new-game.html"><span class="eyebrow">THE NEXT CHAPTER</span><h2>New game</h2><p>Take the first steps into a new expedition, rebuilt in modern Phaser.</p><span class="action">Play early build <span aria-hidden="true">→</span></span></a>
 </div>
 <p class="controls">Keyboard play · Arrows to move · Shift to run<br>Space to jump / double-jump · C to attack with an axe</p>
-<footer>Made for fun, one slime at a time. <span>v0.2.3</span></footer>
+<footer>Made for fun, one slime at a time. <span>v0.3.0</span></footer>
 </main>
 <script>if (new URLSearchParams(location.search).get('from') === 'death') document.getElementById('returnMessage').textContent = 'The dungeon wins this round. Ready for another try?';</script>
 </body>
