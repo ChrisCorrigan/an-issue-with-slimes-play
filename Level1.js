@@ -33,6 +33,7 @@ SlimesGame.Level1.prototype = {
         //  ##########     SOUND     ###########
 
         this.music1 = this.add.audio('gameMusic1');
+        this.music1.onLoop.add(this.restartLevelMusic, this);
         this.music1.play('', 0, 1, true);
         this.soundZap = this.add.audio('zap');
         this.soundSwoosh = this.add.audio('swoosh');
@@ -884,6 +885,12 @@ SlimesGame.Level1.prototype = {
             this.player.inAttack = true;
             this.soundSwoosh.play('');
             this.player.attackTime = this.game.time.now + this.player.axeTime;
+        }
+    },
+
+    restartLevelMusic: function() {
+        if (!this.exiting && this.music1 && this.music1.usingWebAudio) {
+            this.music1.play('', 0, 1, true, true);
         }
     },
 
